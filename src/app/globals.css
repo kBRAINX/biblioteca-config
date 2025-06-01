@@ -3,57 +3,385 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
-    --radius: 0.5rem;
-  }
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 217 91% 60%;
+        --primary-foreground: 0 0% 98%;
+        --primary-hover: 217 91% 50%;
+        --primary-hex: #3B82F6;
+        --secondary: 262 83% 58%;
+        --secondary-foreground: 0 0% 98%;
+        --secondary-hover: 262 83% 48%;
+        --secondary-hex: #8B5CF6;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 217 91% 60%;
+        --radius: 0.5rem;
+    }
 
-  .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
-  }
+    .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+    }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    * {
+        @apply border-border;
+    }
+
+    body {
+        @apply bg-background text-foreground;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Transitions pour les changements de couleur en temps réel */
+    button,
+    .btn,
+    input:focus,
+    textarea:focus,
+    select:focus,
+    [class*="bg-primary"],
+    [class*="text-primary"],
+    [class*="border-primary"],
+    [class*="bg-secondary"],
+    [class*="text-secondary"],
+    [class*="border-secondary"] {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Animation pour les changements de thème */
+    .theme-transition {
+        transition: background-color 0.5s ease,
+        border-color 0.5s ease,
+        color 0.5s ease,
+        box-shadow 0.3s ease;
+    }
+
+    /* Focus states avec couleurs dynamiques */
+    input:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+        outline: 2px solid hsl(var(--primary));
+        outline-offset: 2px;
+    }
+
+    /* Scroll bar avec couleurs du thème */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: hsl(var(--muted));
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: hsl(var(--primary) / 0.5);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: hsl(var(--primary) / 0.7);
+    }
+
+    /* Styles pour les éléments avec couleurs dynamiques */
+    .color-primary {
+        color: hsl(var(--primary));
+    }
+
+    .bg-primary-dynamic {
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+    }
+
+    .border-primary-dynamic {
+        border-color: hsl(var(--primary));
+    }
+
+    .color-secondary {
+        color: hsl(var(--secondary));
+    }
+
+    .bg-secondary-dynamic {
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+    }
+
+    .border-secondary-dynamic {
+        border-color: hsl(var(--secondary));
+    }
+
+    /* Animation pour l'aperçu en temps réel */
+    .preview-mode {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Hover effects avec couleurs dynamiques */
+    .hover-primary:hover {
+        background-color: hsl(var(--primary-hover, var(--primary)));
+        color: hsl(var(--primary-foreground));
+    }
+
+    .hover-secondary:hover {
+        background-color: hsl(var(--secondary-hover, var(--secondary)));
+        color: hsl(var(--secondary-foreground));
+    }
+
+    /* Styles pour les notifications et alertes */
+    .notification-primary {
+        background-color: hsl(var(--primary) / 0.1);
+        border-color: hsl(var(--primary) / 0.3);
+        color: hsl(var(--primary));
+    }
+
+    .notification-secondary {
+        background-color: hsl(var(--secondary) / 0.1);
+        border-color: hsl(var(--secondary) / 0.3);
+        color: hsl(var(--secondary));
+    }
+
+    /* Classes utilitaires pour les gradients */
+    .gradient-primary {
+        background: linear-gradient(135deg,
+        hsl(var(--primary)) 0%,
+        hsl(var(--primary-hover, var(--primary))) 100%);
+    }
+
+    .gradient-secondary {
+        background: linear-gradient(135deg,
+        hsl(var(--secondary)) 0%,
+        hsl(var(--secondary-hover, var(--secondary))) 100%);
+    }
+
+    .gradient-primary-secondary {
+        background: linear-gradient(135deg,
+        hsl(var(--primary)) 0%,
+        hsl(var(--secondary)) 100%);
+    }
+
+    /* Animation pour les changements de couleur */
+    .color-change-animation {
+        animation: colorPulse 0.6s ease-in-out;
+    }
+
+    @keyframes colorPulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    /* Styles pour les sélecteurs de couleur */
+    .color-picker-wrapper {
+        position: relative;
+    }
+
+    .color-picker-wrapper input[type="color"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+    }
+
+    .color-picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+        border: none;
+        border-radius: 6px;
+    }
+
+    .color-picker-wrapper input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 6px;
+    }
+
+    .color-picker-wrapper input[type="color"]::-moz-color-swatch {
+        border: none;
+        border-radius: 6px;
+    }
+
+    /* Styles pour les thèmes prédéfinis */
+    .theme-preset-button {
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .theme-preset-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .theme-preset-button:active {
+        transform: scale(0.95);
+    }
+
+    /* Styles pour l'aperçu de l'interface */
+    .interface-preview {
+        transform-origin: top left;
+        transition: all 0.3s ease;
+    }
+
+    .interface-preview:hover {
+        transform: scale(1.02);
+    }
+
+    /* Classes utilitaires pour les états de focus avec couleurs dynamiques */
+    .focus-primary:focus {
+        outline: 2px solid hsl(var(--primary));
+        outline-offset: 2px;
+    }
+
+    .focus-secondary:focus {
+        outline: 2px solid hsl(var(--secondary));
+        outline-offset: 2px;
+    }
+
+    /* Animation pour les badges et notifications */
+    .badge-pulse {
+        animation: badgePulse 2s infinite;
+    }
+
+    @keyframes badgePulse {
+        0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.05);
+            opacity: 0.8;
+        }
+    }
+
+    /* Styles pour les éléments interactifs avec feedback visuel */
+    .interactive-element {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .interactive-element:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .interactive-element:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styles pour les cartes avec bordures colorées */
+    .card-primary-border {
+        border-left: 4px solid hsl(var(--primary));
+    }
+
+    .card-secondary-border {
+        border-left: 4px solid hsl(var(--secondary));
+    }
+
+    /* Animation pour les changements de thème global */
+    .theme-changing {
+        animation: themeChange 0.5s ease-in-out;
+    }
+
+    @keyframes themeChange {
+        0% {
+            filter: brightness(1);
+        }
+        50% {
+            filter: brightness(1.1);
+        }
+        100% {
+            filter: brightness(1);
+        }
+    }
+
+    /* Styles pour les indicateurs de couleur */
+    .color-indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styles responsifs pour les couleurs */
+    @media (max-width: 640px) {
+        .color-picker-wrapper {
+            min-width: 40px;
+            min-height: 40px;
+        }
+    }
+
+    /* Styles pour l'accessibilité */
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
+
+    /* Styles pour le mode sombre avec couleurs dynamiques */
+    .dark .bg-primary-dynamic {
+        background-color: hsl(var(--primary) / 0.9);
+    }
+
+    .dark .bg-secondary-dynamic {
+        background-color: hsl(var(--secondary) / 0.9);
+    }
+
+    /* Styles pour les alertes et messages avec couleurs du thème */
+    .alert-primary {
+        background-color: hsl(var(--primary) / 0.1);
+        border: 1px solid hsl(var(--primary) / 0.2);
+        color: hsl(var(--primary));
+    }
+
+    .alert-secondary {
+        background-color: hsl(var(--secondary) / 0.1);
+        border: 1px solid hsl(var(--secondary) / 0.2);
+        color: hsl(var(--secondary));
+    }
 }

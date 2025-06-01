@@ -120,14 +120,16 @@ const defaultOrgSettings: OrgSettings = {
 
 // Collections à créer
 const collectionsToCreate = [
-  'BiblioAdmin',
-  'BiblioBooks',
-  'BiblioThesis',
-  'BiblioUser',
-  'Configuration',
-  'Departements',
-  'OnlineCourses',
-  'admin'
+    'BiblioAdmin',
+    'BiblioBooks',
+    'BiblioThesis',
+    'BiblioUser',
+    'Configuration',
+    'Departements',
+    'OnlineCourses',
+    'ClientMessages',
+    'AdminMessages',
+    'admin'
 ];
 
 export class DatabaseInitializer {

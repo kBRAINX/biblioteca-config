@@ -1,6 +1,13 @@
-// src/app/dashboard/page.tsx
-import AdvancedSettingsPanel from '@/components/AdvancedSettingsPanel';
+'use client';
+
+import React from 'react';
+import ProtectedRoute from '@/components/ProtectedRoute';
+import ConfigurationPanel from "@/components/ConfigurationPanel";
 
 export default function DashboardPage() {
-  return <AdvancedSettingsPanel />;
+  return (
+    <ProtectedRoute>
+      <ConfigurationPanel />
+    </ProtectedRoute>
+  );
 }
