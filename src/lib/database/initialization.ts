@@ -129,7 +129,8 @@ const collectionsToCreate = [
     'OnlineCourses',
     'ClientMessages',
     'AdminMessages',
-    'admin'
+    'SuperAdmin',
+    'BiblioWeb'
 ];
 
 export class DatabaseInitializer {
@@ -148,7 +149,7 @@ export class DatabaseInitializer {
 
     try {
       // 1. Créer le document administrateur
-      const adminRef = doc(db, 'admin', adminData.email);
+      const adminRef = doc(db, 'SuperAdmin', adminData.email);
       const adminDocument: AdminData = {
         ...adminData,
         role: 'super_admin',

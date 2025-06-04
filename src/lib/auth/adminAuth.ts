@@ -47,7 +47,7 @@ export class AdminAuth {
                 createdAt: new Date(),
             };
 
-            await setDoc(doc(db, 'admin', user.uid), adminData);
+            await setDoc(doc(db, 'SuperAdmin', user.uid), adminData);
 
             return {
                 uid: user.uid,
@@ -65,7 +65,7 @@ export class AdminAuth {
             const user = userCredential.user;
 
             // Récupérer les données admin
-            const adminDoc = await getDoc(doc(db, 'admin', user.uid));
+            const adminDoc = await getDoc(doc(db, 'SuperAdmin', user.uid));
 
             if (!adminDoc.exists()) {
                 throw new Error('Compte administrateur non trouvé');
@@ -74,7 +74,7 @@ export class AdminAuth {
             const adminData = adminDoc.data();
 
             // Mettre à jour la dernière connexion
-            await updateDoc(doc(db, 'admin', user.uid), {
+            await updateDoc(doc(db, 'SuperAdmin', user.uid), {
                 lastLogin: new Date()
             });
 
@@ -102,7 +102,7 @@ export class AdminAuth {
         if (!user) return null;
 
         try {
-            const adminDoc = await getDoc(doc(db, 'admin', user.uid));
+            const adminDoc = await getDoc(doc(db, 'SuperAdmin', user.uid));
 
             if (!adminDoc.exists()) {
                 return null;
@@ -113,14 +113,14 @@ export class AdminAuth {
                 ...adminDoc.data()
             } as AdminUser;
         } catch (error) {
-            console.error('Error getting current admin:', error);
+            console.error('Error getting current super admin:', error);
             return null;
         }
     }
 
     static async updateProfile(uid: string, data: { name?: string }): Promise<void> {
         try {
-            await updateDoc(doc(db, 'admin', uid), {
+            await updateDoc(doc(db, 'SuperAdmin', uid), {
                 ...data,
                 updatedAt: new Date()
             });
@@ -143,7 +143,7 @@ export class AdminAuth {
             await updatePassword(user, newPassword);
 
             // Mettre à jour la date de modification dans Firestore
-            await updateDoc(doc(db, 'admin', user.uid), {
+            await updateDoc(doc(db, 'SuperAdmin', user.uid), {
                 passwordUpdatedAt: new Date()
             });
         } catch (error: unknown) {
@@ -172,7 +172,7 @@ export class AdminAuth {
             await updateEmail(user, newEmail);
 
             // Mettre à jour dans Firestore
-            await updateDoc(doc(db, 'admin', user.uid), {
+            await updateDoc(doc(db, 'SuperAdmin', user.uid), {
                 email: newEmail,
                 emailUpdatedAt: new Date()
             });
